@@ -14,6 +14,12 @@ class ResultViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var placeImagePageControl: UIPageControl!
 
+  // MARK: IBAction
+  @IBAction func changeImagePage(_ sender: UIPageControl) {
+    let point = CGPoint(x: collectionVIew.frame.size.width * CGFloat(sender.currentPage), y: 0)
+    collectionVIew.setContentOffset(point, animated: true)
+  }
+
   // MARK: Properties
   var placeID: String?
   var photoReference: [String] = []
@@ -26,6 +32,19 @@ class ResultViewController: UIViewController {
     super.viewWillAppear(true)
 
     guard let id = placeID else { return }
+    fetchPlaceDetails(id: id)
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+
+    // Do any additional setup after loading the view.
+    tableView.separatorStyle = .none
+    collectionVIew.isPagingEnabled = true
+  }
+
+  // MARK: Functions
+  func fetchPlaceDetails(id: String) {
 
     APIManager.shared.requestPlaceDetails(placeID: id) { result in
 
@@ -35,26 +54,32 @@ class ResultViewController: UIViewController {
         self.placeName = details.result.name
         self.placeAddress = details.result.formattedAddress
 
-        let dispatchGroup = DispatchGroup()
+        if details.result.photos.count >= 5 {
 
-        for i in 0..<5 {
-          dispatchGroup.enter()
-          let photoRef = details.result.photos[i].photoReference
-          self.photoReference.append(photoRef)
-          dispatchGroup.leave()
-        }
+          let dispatchGroup = DispatchGroup()
 
-        for i in 0..<5 {
-          dispatchGroup.enter()
-          APIManager.shared.requestPlacePhotos(photoRef: self.photoReference[i]) { image in
-            self.photoUIImage.append(image)
+          for i in 0..<5 {
+            dispatchGroup.enter()
+            let photoRef = details.result.photos[i].photoReference
+            self.photoReference.append(photoRef)
             dispatchGroup.leave()
           }
-        }
 
-        dispatchGroup.notify(queue: .main) {
-          self.tableView.reloadData()
-          self.collectionVIew.reloadData()
+          for i in 0..<5 {
+            dispatchGroup.enter()
+            APIManager.shared.requestPlacePhotos(photoRef: self.photoReference[i]) { image in
+              self.photoUIImage.append(image)
+              dispatchGroup.leave()
+            }
+          }
+
+          dispatchGroup.notify(queue: .main) {
+            self.tableView.reloadData()
+            self.collectionVIew.reloadData()
+          }
+
+        } else {
+          self.alertForApiError(message: "No data to show")
         }
 
       case .failure(let error):
@@ -62,15 +87,7 @@ class ResultViewController: UIViewController {
       }
     }
   }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
 
-    // Do any additional setup after loading the view.
-    tableView.separatorStyle = .none
-  }
-
-  // MARK: Functions
   func alertForApiError(message: String) {
 
     let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
@@ -82,17 +99,23 @@ class ResultViewController: UIViewController {
   }
 }
 
-
+// MARK: UICollectionViewDelegate
 extension ResultViewController: UICollectionViewDelegate {
 }
 
+// MARK: UICollectionViewDelegateFlowLayout
 extension ResultViewController: UICollectionViewDelegateFlowLayout {
+
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    return 0
+  }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: UIScreen.main.bounds.width - 32, height: UIScreen.main.bounds.width - 32)
+    return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
   }
 }
 
+// MARK: UICollectionViewDataSource
 extension ResultViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return 5
@@ -104,7 +127,6 @@ extension ResultViewController: UICollectionViewDataSource {
       if !photoUIImage.isEmpty {
         cell.placeImage.image = photoUIImage[indexPath.row]
       }
-
       return cell
     }
     return CollectionViewCell()
@@ -130,9 +152,19 @@ extension ResultViewController: UITableViewDataSource {
       if !photoUIImage.isEmpty {
         cell.placeImage.image = photoUIImage[0]
       }
-
       return cell
     }
     return TableViewCell()
+  }
+}
+
+// MARK: UIScrollViewDelegate
+extension ResultViewController: UIScrollViewDelegate {
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+
+    let offSet = scrollView.contentOffset.x
+    let width = scrollView.frame.width
+    let horizontalCenter = width / 2
+    placeImagePageControl.currentPage = Int(offSet + horizontalCenter) / Int(width)
   }
 }

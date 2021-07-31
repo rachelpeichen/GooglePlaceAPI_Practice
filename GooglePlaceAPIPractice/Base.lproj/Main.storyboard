@@ -55,10 +55,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bVH-6E-Pos">
-                                <rect key="frame" x="0.0" y="454" width="414" height="392"/>
+                                <rect key="frame" x="0.0" y="545" width="414" height="301"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="392" id="9jt-QL-2I4"/>
+                                    <constraint firstAttribute="height" constant="301" id="uva-Vi-4nc"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TableCell" rowHeight="155" id="JfU-s8-FLn" customClass="TableViewCell" customModule="GooglePlaceAPIPractice" customModuleProvider="target">
@@ -114,7 +114,7 @@
                                 </connections>
                             </tableView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="k5z-Or-lPF" userLabel="CollectionView">
-                                <rect key="frame" x="0.0" y="88" width="414" height="358"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="441"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nvd-ic-DLm">
                                     <size key="itemSize" width="416" height="355"/>
@@ -124,7 +124,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionCell" id="Pno-Nu-MrO" customClass="CollectionViewCell" customModule="GooglePlaceAPIPractice" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.5" width="416" height="357"/>
+                                        <rect key="frame" x="0.0" y="42" width="416" height="357"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="416" height="357"/>
@@ -155,9 +155,12 @@
                                 </connections>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="KXh-xw-JfX">
-                                <rect key="frame" x="0.0" y="418" width="414" height="28"/>
-                                <color key="pageIndicatorTintColor" systemColor="systemGray3Color"/>
-                                <color key="currentPageIndicatorTintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="0.0" y="454" width="414" height="28"/>
+                                <color key="pageIndicatorTintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="changeImagePage:" destination="lei-Ib-iIy" eventType="valueChanged" id="m46-wp-iWZ"/>
+                                </connections>
                             </pageControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cCb-5P-3BO"/>
@@ -165,13 +168,13 @@
                         <constraints>
                             <constraint firstItem="k5z-Or-lPF" firstAttribute="leading" secondItem="cCb-5P-3BO" secondAttribute="leading" id="EdK-fK-Nd7"/>
                             <constraint firstItem="bVH-6E-Pos" firstAttribute="leading" secondItem="cCb-5P-3BO" secondAttribute="leading" id="Fdt-y6-52j"/>
+                            <constraint firstItem="bVH-6E-Pos" firstAttribute="top" secondItem="k5z-Or-lPF" secondAttribute="bottom" constant="16" id="GRw-aJ-tgW"/>
                             <constraint firstItem="KXh-xw-JfX" firstAttribute="trailing" secondItem="cCb-5P-3BO" secondAttribute="trailing" id="IEO-rU-AMO"/>
                             <constraint firstItem="cCb-5P-3BO" firstAttribute="bottom" secondItem="bVH-6E-Pos" secondAttribute="bottom" constant="16" id="SEg-wD-U2M"/>
                             <constraint firstItem="KXh-xw-JfX" firstAttribute="leading" secondItem="cCb-5P-3BO" secondAttribute="leading" id="YCm-Rc-RUJ"/>
                             <constraint firstItem="k5z-Or-lPF" firstAttribute="trailing" secondItem="cCb-5P-3BO" secondAttribute="trailing" id="cRO-HU-FBl"/>
-                            <constraint firstItem="bVH-6E-Pos" firstAttribute="top" secondItem="k5z-Or-lPF" secondAttribute="bottom" constant="8" id="gn8-cP-eXT"/>
                             <constraint firstItem="k5z-Or-lPF" firstAttribute="top" secondItem="cCb-5P-3BO" secondAttribute="top" id="hwQ-Zo-dAG"/>
-                            <constraint firstItem="KXh-xw-JfX" firstAttribute="bottom" secondItem="k5z-Or-lPF" secondAttribute="bottom" id="iQ3-GS-bhg"/>
+                            <constraint firstItem="KXh-xw-JfX" firstAttribute="centerY" secondItem="BT2-TD-cDj" secondAttribute="centerY" constant="20" id="m5f-V9-W0q"/>
                             <constraint firstItem="cCb-5P-3BO" firstAttribute="trailing" secondItem="bVH-6E-Pos" secondAttribute="trailing" id="w8e-hL-hDi"/>
                         </constraints>
                     </view>
@@ -209,9 +212,6 @@
         <image name="Placeholder" width="300" height="300"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

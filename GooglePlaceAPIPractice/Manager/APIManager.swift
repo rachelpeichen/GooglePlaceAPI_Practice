@@ -14,7 +14,7 @@ class APIManager {
 
   static let shared = APIManager()
 
-  func requestPlaceId(input: String, completion: @escaping ((PlaceID) -> Void)) {
+  func requestPlaceId(input: String, completion: @escaping (Swift.Result<PlaceID, Error>) -> Void) {
 
     let requestURL = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=" + apiKey
 
@@ -27,36 +27,40 @@ class APIManager {
       switch response.result {
 
       case .success:
-
         if let jsonData = response.data {
 
           do {
-
             let decoder = JSONDecoder()
             let placeIDdata: PlaceID = try decoder.decode(PlaceID.self, from: jsonData)
-            completion(placeIDdata)
+            completion(.success(placeIDdata))
 
           } catch let DecodingError.dataCorrupted(context) {
             print(context)
+            completion(.failure(DecodingError.dataCorrupted(context)))
 
           } catch let DecodingError.keyNotFound(key, context) {
             print(DecodingError.keyNotFound(key, context))
+            completion(.failure(DecodingError.keyNotFound(key, context)))
 
           } catch let DecodingError.valueNotFound(value, context) {
             print("Value '\(value)' not found:", context.debugDescription)
             print("codingPath:", context.codingPath)
+            completion(.failure(DecodingError.valueNotFound(value, context)))
 
           } catch let DecodingError.typeMismatch(type, context) {
             print("Type '\(type)' mismatch:", context.debugDescription)
             print("codingPath:", context.codingPath)
+            completion(.failure(DecodingError.typeMismatch(type, context)))
 
           } catch let error as NSError {
             print("Failed to load: \(error.localizedDescription)")
+            completion(.failure(error))
           }
         }
 
       case.failure(let error):
         print("Request error: \(error.localizedDescription)")
+        completion(.failure(error))
       }
     }
   }
@@ -74,31 +78,34 @@ class APIManager {
       switch response.result {
 
       case .success:
-
         if let jsonData = response.data {
 
           do {
-
             let decoder = JSONDecoder()
             let detailsData: PlaceDetails = try decoder.decode(PlaceDetails.self, from: jsonData)
             completion(.success(detailsData))
 
           } catch let DecodingError.dataCorrupted(context) {
             print(context)
+            completion(.failure(DecodingError.dataCorrupted(context)))
 
           } catch let DecodingError.keyNotFound(key, context) {
             print(DecodingError.keyNotFound(key, context))
+            completion(.failure(DecodingError.keyNotFound(key, context)))
 
           } catch let DecodingError.valueNotFound(value, context) {
             print("Value '\(value)' not found:", context.debugDescription)
             print("codingPath:", context.codingPath)
+            completion(.failure(DecodingError.valueNotFound(value, context)))
 
           } catch let DecodingError.typeMismatch(type, context) {
             print("Type '\(type)' mismatch:", context.debugDescription)
             print("codingPath:", context.codingPath)
+            completion(.failure(DecodingError.typeMismatch(type, context)))
 
           } catch let error as NSError {
             print("Failed to load: \(error.localizedDescription)")
+            completion(.failure(error))
           }
         }
 
@@ -125,7 +132,6 @@ class APIManager {
         print(error.localizedDescription)
         
       } else if let data = data {
-
         if let photo = UIImage(data: data) {
           completion(photo)
         }

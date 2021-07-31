@@ -25,7 +25,6 @@ class ViewController: UIViewController {
   }
 
   // MARK: Functions
-  // MARK: - Prepare For Segue
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
     if let resultVC = segue.destination as? ResultViewController {
@@ -61,14 +60,20 @@ extension ViewController: UISearchBarDelegate {
 
     APIManager.shared.requestPlaceId(input: text) { result in
 
-      if !result.candidates.isEmpty {
-        print(result)
-        self.placeID = result.candidates[0].placeID
-        self.performSegue(withIdentifier: "NavigateToResultVC", sender: self)
-        searchBar.text = ""
-      } else {
-        print(result)
-        self.alertForSearchError(message: result.status)
+      switch result {
+
+      case .success(let placeID):
+        if !placeID.candidates.isEmpty {
+          self.placeID = placeID.candidates[0].placeID
+          self.performSegue(withIdentifier: "NavigateToResultVC", sender: self)
+          searchBar.text = ""
+
+        } else {
+          self.alertForSearchError(message: placeID.status)
+        }
+
+      case .failure(let error):
+        self.alertForSearchError(message: error.localizedDescription)
       }
     }
   }
