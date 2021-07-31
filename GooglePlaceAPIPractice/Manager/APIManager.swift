@@ -10,11 +10,11 @@ import Alamofire
 
 class APIManager {
 
-  let apiKey = "MyApiKey"
+  let apiKey = "YourAPIKey"
 
   static let shared = APIManager()
 
-  func requestPlaceId(input: String, completion: @escaping (Swift.Result<PlaceID, Error>) -> Void) {
+  func requestPlaceID(input: String, completion: @escaping (Swift.Result<PlaceID, Error>) -> Void) {
 
     let requestURL = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=" + apiKey
 

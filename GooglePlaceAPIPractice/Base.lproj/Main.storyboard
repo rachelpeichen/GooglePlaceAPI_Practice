@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" text="" placeholder="Find a place :)" showsCancelButton="YES" showsScopeBar="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s6R-lZ-81S">
+                            <searchBar contentMode="redraw" text="" placeholder="Type place name" showsCancelButton="YES" showsScopeBar="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s6R-lZ-81S">
                                 <rect key="frame" x="0.0" y="88" width="414" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="z8e-IW-FLf"/>
@@ -27,13 +28,57 @@
                                     <string>Title</string>
                                 </scopeButtonTitles>
                             </searchBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="FSX-z3-TXe">
+                                <rect key="frame" x="16" y="185" width="382" height="30"/>
+                                <state key="normal" title="寶藏巖國際藝術村 Treasure Hill Artist Village">
+                                    <color key="titleColor" systemColor="systemBlueColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fnd-zp-avK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfb-7O-Tdy">
+                                <rect key="frame" x="16" y="231" width="382" height="30"/>
+                                <state key="normal" title="美麗新廣場 大直館 MIRANEW SQUARE Dazhi">
+                                    <color key="titleColor" systemColor="systemBlueColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MKf-4B-BYY"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Just try below places" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s1b-Ts-uJ1">
+                                <rect key="frame" x="16" y="148" width="161" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="T8U-eB-Pid">
+                                <rect key="frame" x="16" y="277" width="382" height="30"/>
+                                <state key="normal" title="台北市臨江街觀光夜市｜通化街夜市 Taiwan Taipei Night Market">
+                                    <color key="titleColor" systemColor="systemBlueColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UEq-hD-FPf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="s1b-Ts-uJ1" firstAttribute="top" secondItem="s6R-lZ-81S" secondAttribute="bottom" constant="16" id="1Sw-0x-5Bn"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="FSX-z3-TXe" secondAttribute="trailing" constant="16" id="93l-x7-UXO"/>
                             <constraint firstItem="s6R-lZ-81S" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="FbG-13-tv8"/>
+                            <constraint firstItem="FSX-z3-TXe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Lrc-In-bPe"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hfb-7O-Tdy" secondAttribute="trailing" constant="16" id="MnI-TW-mRt"/>
+                            <constraint firstItem="FSX-z3-TXe" firstAttribute="top" secondItem="s1b-Ts-uJ1" secondAttribute="bottom" constant="16" id="Zsd-zl-g9b"/>
+                            <constraint firstItem="hfb-7O-Tdy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="fOA-xJ-TpI"/>
+                            <constraint firstItem="s1b-Ts-uJ1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="lSd-Bw-l8v"/>
+                            <constraint firstItem="hfb-7O-Tdy" firstAttribute="top" secondItem="FSX-z3-TXe" secondAttribute="bottom" constant="16" id="mUp-Cy-Gkf"/>
+                            <constraint firstItem="T8U-eB-Pid" firstAttribute="top" secondItem="hfb-7O-Tdy" secondAttribute="bottom" constant="16" id="o2d-4O-uRr"/>
                             <constraint firstItem="s6R-lZ-81S" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pbb-Db-JfR"/>
                             <constraint firstItem="s6R-lZ-81S" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="rOC-TM-nPB"/>
+                            <constraint firstItem="T8U-eB-Pid" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="tQp-Zj-0a4"/>
+                            <constraint firstAttribute="trailing" secondItem="T8U-eB-Pid" secondAttribute="trailing" constant="16" id="ycM-Fl-YgZ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Google Place Search" id="Ssb-uM-Vff"/>
@@ -61,28 +106,28 @@
                                     <constraint firstAttribute="height" constant="301" id="uva-Vi-4nc"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TableCell" rowHeight="155" id="JfU-s8-FLn" customClass="TableViewCell" customModule="GooglePlaceAPIPractice" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="155"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TableCell" rowHeight="159" id="JfU-s8-FLn" customClass="TableViewCell" customModule="GooglePlaceAPIPractice" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="159"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JfU-s8-FLn" id="arC-0k-unl">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="155"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="159"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="t4S-fU-tSb">
-                                                    <rect key="frame" x="16" y="16" width="120" height="123"/>
+                                                    <rect key="frame" x="16" y="16" width="120" height="127"/>
                                                     <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="120" id="acX-Zh-S3R"/>
                                                         <constraint firstAttribute="height" constant="120" id="c6h-1R-ITP"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p1S-3t-hKw">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p1S-3t-hKw">
                                                     <rect key="frame" x="144" y="16" width="254" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QOv-Vi-Kx5">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QOv-Vi-Kx5">
                                                     <rect key="frame" x="144" y="43.5" width="254" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
@@ -123,27 +168,29 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionCell" id="Pno-Nu-MrO" customClass="CollectionViewCell" customModule="GooglePlaceAPIPractice" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="42" width="416" height="357"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="CollectionCell" id="Pno-Nu-MrO" customClass="CollectionViewCell" customModule="GooglePlaceAPIPractice" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="43" width="416" height="355"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="416" height="357"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="lfg-dx-bDM">
+                                            <rect key="frame" x="0.0" y="0.0" width="416" height="355"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="boK-mt-ilL">
-                                                    <rect key="frame" x="0.0" y="0.0" width="416" height="357"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="416" height="355"/>
                                                     <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="boK-mt-ilL" secondAttribute="height" multiplier="1:1" id="1yy-Q2-f5S"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
-                                        </view>
-                                        <color key="backgroundColor" systemColor="systemYellowColor"/>
-                                        <constraints>
-                                            <constraint firstItem="boK-mt-ilL" firstAttribute="centerY" secondItem="Pno-Nu-MrO" secondAttribute="centerY" id="SgI-Kf-izZ"/>
-                                            <constraint firstItem="boK-mt-ilL" firstAttribute="top" secondItem="Pno-Nu-MrO" secondAttribute="top" id="T1b-G6-yNM"/>
-                                            <constraint firstAttribute="trailing" secondItem="boK-mt-ilL" secondAttribute="trailing" id="UgB-Af-H5O"/>
-                                            <constraint firstItem="boK-mt-ilL" firstAttribute="leading" secondItem="Pno-Nu-MrO" secondAttribute="leading" id="WAP-Iy-xJp"/>
-                                        </constraints>
-                                        <size key="customSize" width="416" height="357"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="boK-mt-ilL" secondAttribute="bottom" id="2Td-FO-oDa"/>
+                                                <constraint firstItem="boK-mt-ilL" firstAttribute="top" secondItem="lfg-dx-bDM" secondAttribute="top" id="T1b-G6-yNM"/>
+                                                <constraint firstAttribute="trailing" secondItem="boK-mt-ilL" secondAttribute="trailing" id="UgB-Af-H5O"/>
+                                                <constraint firstItem="boK-mt-ilL" firstAttribute="leading" secondItem="lfg-dx-bDM" secondAttribute="leading" id="WAP-Iy-xJp"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="placeImage" destination="boK-mt-ilL" id="X38-ak-ati"/>
                                         </connections>
@@ -155,9 +202,9 @@
                                 </connections>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="KXh-xw-JfX">
-                                <rect key="frame" x="0.0" y="454" width="414" height="28"/>
+                                <rect key="frame" x="0.0" y="501.5" width="414" height="27.5"/>
                                 <color key="pageIndicatorTintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="currentPageIndicatorTintColor" systemColor="systemGray6Color"/>
                                 <connections>
                                     <action selector="changeImagePage:" destination="lei-Ib-iIy" eventType="valueChanged" id="m46-wp-iWZ"/>
                                 </connections>
@@ -171,10 +218,10 @@
                             <constraint firstItem="bVH-6E-Pos" firstAttribute="top" secondItem="k5z-Or-lPF" secondAttribute="bottom" constant="16" id="GRw-aJ-tgW"/>
                             <constraint firstItem="KXh-xw-JfX" firstAttribute="trailing" secondItem="cCb-5P-3BO" secondAttribute="trailing" id="IEO-rU-AMO"/>
                             <constraint firstItem="cCb-5P-3BO" firstAttribute="bottom" secondItem="bVH-6E-Pos" secondAttribute="bottom" constant="16" id="SEg-wD-U2M"/>
+                            <constraint firstItem="KXh-xw-JfX" firstAttribute="bottom" secondItem="k5z-Or-lPF" secondAttribute="bottom" id="Y0Z-iu-4xk"/>
                             <constraint firstItem="KXh-xw-JfX" firstAttribute="leading" secondItem="cCb-5P-3BO" secondAttribute="leading" id="YCm-Rc-RUJ"/>
                             <constraint firstItem="k5z-Or-lPF" firstAttribute="trailing" secondItem="cCb-5P-3BO" secondAttribute="trailing" id="cRO-HU-FBl"/>
                             <constraint firstItem="k5z-Or-lPF" firstAttribute="top" secondItem="cCb-5P-3BO" secondAttribute="top" id="hwQ-Zo-dAG"/>
-                            <constraint firstItem="KXh-xw-JfX" firstAttribute="centerY" secondItem="BT2-TD-cDj" secondAttribute="centerY" constant="20" id="m5f-V9-W0q"/>
                             <constraint firstItem="cCb-5P-3BO" firstAttribute="trailing" secondItem="bVH-6E-Pos" secondAttribute="trailing" id="w8e-hL-hDi"/>
                         </constraints>
                     </view>
@@ -213,14 +260,17 @@
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

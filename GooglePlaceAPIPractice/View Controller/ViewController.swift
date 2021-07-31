@@ -12,6 +12,15 @@ class ViewController: UIViewController {
   // MARK: Outlet
   @IBOutlet weak var searchBar: UISearchBar!
 
+
+  @IBAction func btnPressed(_ sender: UIButton) {
+    searchBar.text = sender.currentTitle
+
+    if let input = sender.currentTitle {
+      requestPlaceID(input: input)
+    }
+  }
+
   // MARK: Properties
   var searchController = UISearchController()
   var resultViewController = ResultViewController()
@@ -30,6 +39,28 @@ class ViewController: UIViewController {
     if let resultVC = segue.destination as? ResultViewController {
       guard let id = placeID else { return }
       resultVC.placeID = id
+    }
+  }
+
+  func requestPlaceID(input: String) {
+
+    APIManager.shared.requestPlaceID(input: input) { result in
+
+      switch result {
+
+      case .success(let placeID):
+        if !placeID.candidates.isEmpty {
+          self.placeID = placeID.candidates[0].placeID
+          self.performSegue(withIdentifier: "NavigateToResultVC", sender: self)
+          self.searchBar.text = ""
+
+        } else {
+          self.alertForSearchError(message: placeID.status)
+        }
+
+      case .failure(let error):
+        self.alertForSearchError(message: error.localizedDescription)
+      }
     }
   }
 
@@ -56,25 +87,7 @@ extension ViewController: UISearchBarDelegate {
 
   func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
 
-    guard let text = searchBar.text else { return }
-
-    APIManager.shared.requestPlaceId(input: text) { result in
-
-      switch result {
-
-      case .success(let placeID):
-        if !placeID.candidates.isEmpty {
-          self.placeID = placeID.candidates[0].placeID
-          self.performSegue(withIdentifier: "NavigateToResultVC", sender: self)
-          searchBar.text = ""
-
-        } else {
-          self.alertForSearchError(message: placeID.status)
-        }
-
-      case .failure(let error):
-        self.alertForSearchError(message: error.localizedDescription)
-      }
-    }
+    guard let input = searchBar.text else { return }
+    requestPlaceID(input: input)
   }
 }
