@@ -9,7 +9,7 @@ import UIKit
 
 class ResultViewController: UIViewController {
 
-  // MARK: IBOutlets
+  // MARK: IBOutlet
   @IBOutlet weak var collectionVIew: UICollectionView!
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var placeImagePageControl: UIPageControl!
@@ -122,6 +122,7 @@ extension ResultViewController: UICollectionViewDataSource {
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
     if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath) as? CollectionViewCell {
 
       if !photoUIImage.isEmpty {
@@ -145,6 +146,7 @@ extension ResultViewController: UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
     if let cell = tableView.dequeueReusableCell(withIdentifier: "TableCell") as? TableViewCell {
 
       cell.layoutTableCell(name: placeName ?? "Name", address: placeAddress ?? "Address")

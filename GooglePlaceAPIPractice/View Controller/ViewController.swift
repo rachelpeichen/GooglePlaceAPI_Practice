@@ -9,10 +9,10 @@ import UIKit
 
 class ViewController: UIViewController {
 
-  // MARK: Outlet
+  // MARK: IBOutlet
   @IBOutlet weak var searchBar: UISearchBar!
 
-
+  // MARK: IBAction
   @IBAction func btnPressed(_ sender: UIButton) {
     searchBar.text = sender.currentTitle
 
@@ -75,6 +75,7 @@ class ViewController: UIViewController {
   }
 }
 
+// MARK:UISearchBarDelegate
 extension ViewController: UISearchBarDelegate {
 
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

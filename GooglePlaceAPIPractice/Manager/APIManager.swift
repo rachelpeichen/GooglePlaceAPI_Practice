@@ -20,7 +20,7 @@ class APIManager {
 
     let url = requestURL + "&input=" + input + "&inputtype=textquery"
 
-    guard let encodedURL = url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) else { return } // 沒有encode時url會invalid因為有帶入input
+    guard let encodedURL = url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) else { return }
 
     AF.request(encodedURL, method: .get, encoding: JSONEncoding.default).responseJSON { response in
 
