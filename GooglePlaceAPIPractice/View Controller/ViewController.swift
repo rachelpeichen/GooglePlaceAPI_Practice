@@ -17,14 +17,14 @@ class ViewController: UIViewController {
     searchBar.text = sender.currentTitle
 
     if let input = sender.currentTitle {
-      requestPlaceID(input: input)
+      requestPlaceTextSearch(input: input)
     }
   }
 
   // MARK: Properties
   var searchController = UISearchController()
   var resultViewController = ResultViewController()
-  var placeID: String?
+  var searchResult: PlaceTextSearch?
 
   // MARK: View Life Cycle
   override func viewDidLoad() {
@@ -37,25 +37,26 @@ class ViewController: UIViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
     if let resultVC = segue.destination as? ResultViewController {
-      guard let id = placeID else { return }
-      resultVC.placeID = id
+      guard let searchResult = searchResult else { return }
+      resultVC.searchResult = searchResult
+      print(searchResult)
     }
   }
 
-  func requestPlaceID(input: String) {
+  func requestPlaceTextSearch(input: String) {
 
-    APIManager.shared.requestPlaceID(input: input) { result in
+    APIManager.shared.requestPlaceTextSearch(input: input) { result in
 
       switch result {
 
-      case .success(let placeID):
-        if !placeID.candidates.isEmpty {
-          self.placeID = placeID.candidates[0].placeID
+      case .success(let searchResult):
+        if !searchResult.results.isEmpty {
+          self.searchResult = searchResult
           self.performSegue(withIdentifier: "NavigateToResultVC", sender: self)
           self.searchBar.text = ""
 
         } else {
-          self.alertForSearchError(message: placeID.status)
+          self.alertForSearchError(message: searchResult.status)
         }
 
       case .failure(let error):
@@ -75,7 +76,7 @@ class ViewController: UIViewController {
   }
 }
 
-// MARK:UISearchBarDelegate
+// MARK: UISearchBarDelegate
 extension ViewController: UISearchBarDelegate {
 
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -89,6 +90,6 @@ extension ViewController: UISearchBarDelegate {
   func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
 
     guard let input = searchBar.text else { return }
-    requestPlaceID(input: input)
+    requestPlaceTextSearch(input: input)
   }
 }

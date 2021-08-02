@@ -16,78 +16,30 @@ class ResultViewController: UIViewController {
 
   // MARK: IBAction
   @IBAction func changeImagePage(_ sender: UIPageControl) {
+
     let point = CGPoint(x: collectionVIew.frame.size.width * CGFloat(sender.currentPage), y: 0)
     collectionVIew.setContentOffset(point, animated: true)
   }
 
   // MARK: Properties
-  var placeID: String?
-  var photoReference: [String] = []
-  var photoUIImage: [UIImage] = []
-  var placeName: String?
-  var placeAddress: String?
+  var searchResult: PlaceTextSearch?
 
   // MARK: View Life Cycle
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(true)
-
-    guard let id = placeID else { return }
-    fetchPlaceDetails(id: id)
-  }
-  
   override func viewDidLoad() {
     super.viewDidLoad()
 
     // Do any additional setup after loading the view.
     tableView.separatorStyle = .none
     collectionVIew.isPagingEnabled = true
-  }
 
-  // MARK: Functions
-  func fetchPlaceDetails(id: String) {
+    guard let searchResult = searchResult else { return}
 
-    APIManager.shared.requestPlaceDetails(placeID: id) { result in
-
-      switch result {
-
-      case .success(let details):
-        self.placeName = details.result.name
-        self.placeAddress = details.result.formattedAddress
-
-        if details.result.photos.count >= 5 {
-
-          let dispatchGroup = DispatchGroup()
-
-          for i in 0..<5 {
-            dispatchGroup.enter()
-            let photoRef = details.result.photos[i].photoReference
-            self.photoReference.append(photoRef)
-            dispatchGroup.leave()
-          }
-
-          for i in 0..<5 {
-            dispatchGroup.enter()
-            APIManager.shared.requestPlacePhotos(photoRef: self.photoReference[i]) { image in
-              self.photoUIImage.append(image)
-              dispatchGroup.leave()
-            }
-          }
-
-          dispatchGroup.notify(queue: .main) {
-            self.tableView.reloadData()
-            self.collectionVIew.reloadData()
-          }
-
-        } else {
-          self.alertForApiError(message: "No data to show")
-        }
-
-      case .failure(let error):
-        self.alertForApiError(message: error.localizedDescription)
-      }
+    if searchResult.results.count < 5 {
+      self.alertForApiError(message: "No enough photos to show")
     }
   }
 
+  // MARK: Functions
   func alertForApiError(message: String) {
 
     let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
@@ -125,9 +77,33 @@ extension ResultViewController: UICollectionViewDataSource {
 
     if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath) as? CollectionViewCell {
 
-      if !photoUIImage.isEmpty {
-        cell.placeImage.image = photoUIImage[indexPath.row]
+      guard let searchResult = searchResult else { return CollectionViewCell() }
+
+      if searchResult.results.count >= 5 {
+
+        if let photo = searchResult.results[indexPath.row].photos {
+
+          APIManager.shared.requestPlacePhoto(photoRef: photo[0].photoReference) { image in
+
+            DispatchQueue.main.async {
+              cell.placeImage.image = image
+            }
+          }
+        }
+
+      } else {
+
+        if let photo = searchResult.results[0].photos {
+
+          APIManager.shared.requestPlacePhoto(photoRef: photo[0].photoReference) { image in
+
+            DispatchQueue.main.async {
+              cell.placeImage.image = image
+            }
+          }
+        }
       }
+
       return cell
     }
     return CollectionViewCell()
@@ -142,17 +118,28 @@ extension ResultViewController: UITableViewDelegate {
 extension ResultViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 1
+    return searchResult?.results.count ?? 0
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
     if let cell = tableView.dequeueReusableCell(withIdentifier: "TableCell") as? TableViewCell {
 
-      cell.layoutTableCell(name: placeName ?? "Name", address: placeAddress ?? "Address")
+      guard let searchResult = searchResult else { return TableViewCell() }
 
-      if !photoUIImage.isEmpty {
-        cell.placeImage.image = photoUIImage[0]
+      let name = searchResult.results[indexPath.row].name
+      let address = searchResult.results[indexPath.row].formattedAddress
+
+      cell.layoutTableCell(name: name, address: address)
+
+      if let photo = searchResult.results[indexPath.row].photos {
+
+        APIManager.shared.requestPlacePhoto(photoRef: photo[0].photoReference) { image in
+
+          DispatchQueue.main.async {
+            cell.placeImage.image = image
+          }
+        }
       }
       return cell
     }

@@ -14,11 +14,11 @@ class APIManager {
 
   static let shared = APIManager()
 
-  func requestPlaceID(input: String, completion: @escaping (Swift.Result<PlaceID, Error>) -> Void) {
+  func requestPlaceTextSearch(input: String, completion: @escaping (Swift.Result<PlaceTextSearch, Error>) -> Void) {
 
-    let requestURL = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=" + apiKey
+    let requestURL = "https://maps.googleapis.com/maps/api/place/textsearch/json?key=" + apiKey
 
-    let url = requestURL + "&input=" + input + "&inputtype=textquery"
+    let url = requestURL + "&query=" + input
 
     guard let encodedURL = url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) else { return }
 
@@ -31,8 +31,8 @@ class APIManager {
 
           do {
             let decoder = JSONDecoder()
-            let placeIDdata: PlaceID = try decoder.decode(PlaceID.self, from: jsonData)
-            completion(.success(placeIDdata))
+            let searchResult: PlaceTextSearch = try decoder.decode(PlaceTextSearch.self, from: jsonData)
+            completion(.success(searchResult))
 
           } catch let DecodingError.dataCorrupted(context) {
             print(context)
@@ -65,58 +65,7 @@ class APIManager {
     }
   }
 
-  func requestPlaceDetails(placeID: String, completion: @escaping (Swift.Result<PlaceDetails, Error>) -> Void) {
-
-    let requestURL = "https://maps.googleapis.com/maps/api/place/details/json?key=" + apiKey
-
-    let url = requestURL + "&place_id=" + placeID
-
-    guard let encodedURL = url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) else { return }
-
-    AF.request(encodedURL, method: .get, encoding: JSONEncoding.default).responseJSON { response in
-
-      switch response.result {
-
-      case .success:
-        if let jsonData = response.data {
-
-          do {
-            let decoder = JSONDecoder()
-            let detailsData: PlaceDetails = try decoder.decode(PlaceDetails.self, from: jsonData)
-            completion(.success(detailsData))
-
-          } catch let DecodingError.dataCorrupted(context) {
-            print(context)
-            completion(.failure(DecodingError.dataCorrupted(context)))
-
-          } catch let DecodingError.keyNotFound(key, context) {
-            print(DecodingError.keyNotFound(key, context))
-            completion(.failure(DecodingError.keyNotFound(key, context)))
-
-          } catch let DecodingError.valueNotFound(value, context) {
-            print("Value '\(value)' not found:", context.debugDescription)
-            print("codingPath:", context.codingPath)
-            completion(.failure(DecodingError.valueNotFound(value, context)))
-
-          } catch let DecodingError.typeMismatch(type, context) {
-            print("Type '\(type)' mismatch:", context.debugDescription)
-            print("codingPath:", context.codingPath)
-            completion(.failure(DecodingError.typeMismatch(type, context)))
-
-          } catch let error as NSError {
-            print("Failed to load: \(error.localizedDescription)")
-            completion(.failure(error))
-          }
-        }
-
-      case.failure(let error):
-        print("Request error: \(error.localizedDescription)")
-        completion(.failure(error))
-      }
-    }
-  }
-
-  func requestPlacePhotos(photoRef: String , completion: @escaping ((UIImage) -> Void)) {
+  func requestPlacePhoto(photoRef: String , completion: @escaping ((UIImage) -> Void)) {
 
     let requestURL = "https://maps.googleapis.com/maps/api/place/photo?key=" + apiKey
 
@@ -139,4 +88,56 @@ class APIManager {
     }
     dataTask.resume()
   }
+
+  func requestNextPage(token: String, completion: @escaping (Swift.Result<PlaceTextSearch, Error>) -> Void) {
+
+    let requestURL = "https://maps.googleapis.com/maps/api/place/textsearch/json?"
+
+    let url = requestURL + "pagetoken=" + token + "&key=" + apiKey
+
+    guard let encodedURL = url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) else { return }
+
+    AF.request(encodedURL, method: .get, encoding: JSONEncoding.default).responseJSON { response in
+
+      switch response.result {
+
+      case .success:
+        if let jsonData = response.data {
+
+          do {
+            let decoder = JSONDecoder()
+            let searchResult: PlaceTextSearch = try decoder.decode(PlaceTextSearch.self, from: jsonData)
+            completion(.success(searchResult))
+
+          } catch let DecodingError.dataCorrupted(context) {
+            print(context)
+            completion(.failure(DecodingError.dataCorrupted(context)))
+
+          } catch let DecodingError.keyNotFound(key, context) {
+            print(DecodingError.keyNotFound(key, context))
+            completion(.failure(DecodingError.keyNotFound(key, context)))
+
+          } catch let DecodingError.valueNotFound(value, context) {
+            print("Value '\(value)' not found:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+            completion(.failure(DecodingError.valueNotFound(value, context)))
+
+          } catch let DecodingError.typeMismatch(type, context) {
+            print("Type '\(type)' mismatch:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+            completion(.failure(DecodingError.typeMismatch(type, context)))
+
+          } catch let error as NSError {
+            print("Failed to load: \(error.localizedDescription)")
+            completion(.failure(error))
+          }
+        }
+
+      case.failure(let error):
+        print("Request error: \(error.localizedDescription)")
+        completion(.failure(error))
+      }
+    }
+  }
+
 }
