@@ -10,7 +10,7 @@ import Alamofire
 
 class APIManager {
 
-  let apiKey = "YourAPIKey"
+  let apiKey = "AIzaSyABI-b0wNVBl1EsyBGmKd-KdrUqS7tvXFg"
 
   static let shared = APIManager()
 

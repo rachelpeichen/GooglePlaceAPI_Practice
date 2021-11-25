@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XGD-7A-9Gu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XGD-7A-9Gu">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" text="" placeholder="Type place name" showsCancelButton="YES" showsScopeBar="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s6R-lZ-81S">
-                                <rect key="frame" x="0.0" y="88" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="z8e-IW-FLf"/>
                                 </constraints>
@@ -29,7 +29,7 @@
                                 </scopeButtonTitles>
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="FSX-z3-TXe">
-                                <rect key="frame" x="16" y="185" width="382" height="30"/>
+                                <rect key="frame" x="16" y="141" width="382" height="30"/>
                                 <state key="normal" title="Taipei 101">
                                     <color key="titleColor" systemColor="systemBlueColor"/>
                                 </state>
@@ -38,7 +38,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfb-7O-Tdy">
-                                <rect key="frame" x="16" y="231" width="382" height="30"/>
+                                <rect key="frame" x="16" y="187" width="382" height="30"/>
                                 <state key="normal" title="Starbucks">
                                     <color key="titleColor" systemColor="systemBlueColor"/>
                                 </state>
@@ -47,13 +47,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Just try below places" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s1b-Ts-uJ1">
-                                <rect key="frame" x="16" y="148" width="161" height="21"/>
+                                <rect key="frame" x="16" y="104" width="161" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="T8U-eB-Pid">
-                                <rect key="frame" x="16" y="277" width="382" height="30"/>
+                                <rect key="frame" x="16" y="233" width="382" height="30"/>
                                 <state key="normal" title="123456789">
                                     <color key="titleColor" systemColor="systemBlueColor"/>
                                 </state>
@@ -91,23 +91,54 @@
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="91.741071428571431"/>
         </scene>
+        <!--Google Map View Controller-->
+        <scene sceneID="7sN-Q3-IPv">
+            <objects>
+                <viewController storyboardIdentifier="GoogleMapViewController" id="5TG-eg-dIJ" customClass="GoogleMapViewController" customModule="GooglePlaceAPIPractice" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nYN-9U-eg0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jNJ-QG-3Wn" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="sRk-8H-jpN"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="jNJ-QG-3Wn" secondAttribute="bottom" id="BfB-5f-ke9"/>
+                            <constraint firstItem="jNJ-QG-3Wn" firstAttribute="leading" secondItem="sRk-8H-jpN" secondAttribute="leading" id="Rhz-eQ-zeJ"/>
+                            <constraint firstItem="jNJ-QG-3Wn" firstAttribute="top" secondItem="sRk-8H-jpN" secondAttribute="top" id="gvW-rT-d0N"/>
+                            <constraint firstItem="jNJ-QG-3Wn" firstAttribute="trailing" secondItem="sRk-8H-jpN" secondAttribute="trailing" id="nqr-dt-XDF"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="9Yx-bk-65W"/>
+                    <connections>
+                        <outlet property="mapView" destination="jNJ-QG-3Wn" id="m6g-b4-lxQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fdc-4A-qOt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="849.77678571428567"/>
+        </scene>
         <!--Result View Controller-->
         <scene sceneID="hbn-GL-wyK">
             <objects>
                 <viewController storyboardIdentifier="ResultViewController" id="lei-Ib-iIy" customClass="ResultViewController" customModule="GooglePlaceAPIPractice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BT2-TD-cDj">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bVH-6E-Pos">
-                                <rect key="frame" x="0.0" y="545" width="414" height="301"/>
+                                <rect key="frame" x="0.0" y="491" width="414" height="301"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="301" id="uva-Vi-4nc"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TableCell" rowHeight="159" id="JfU-s8-FLn" customClass="TableViewCell" customModule="GooglePlaceAPIPractice" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="159"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="159"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JfU-s8-FLn" id="arC-0k-unl">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="159"/>
@@ -159,7 +190,7 @@
                                 </connections>
                             </tableView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="k5z-Or-lPF" userLabel="CollectionView">
-                                <rect key="frame" x="0.0" y="88" width="414" height="441"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="475"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nvd-ic-DLm">
                                     <size key="itemSize" width="416" height="355"/>
@@ -169,7 +200,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="CollectionCell" id="Pno-Nu-MrO" customClass="CollectionViewCell" customModule="GooglePlaceAPIPractice" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="43" width="416" height="355"/>
+                                        <rect key="frame" x="0.0" y="60" width="416" height="355"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="lfg-dx-bDM">
                                             <rect key="frame" x="0.0" y="0.0" width="416" height="355"/>
@@ -202,7 +233,7 @@
                                 </connections>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="KXh-xw-JfX">
-                                <rect key="frame" x="0.0" y="485.5" width="414" height="27.5"/>
+                                <rect key="frame" x="0.0" y="431.5" width="414" height="27.5"/>
                                 <color key="pageIndicatorTintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="currentPageIndicatorTintColor" systemColor="systemGray6Color"/>
                                 <connections>
@@ -247,7 +278,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="q7X-fh-wOr"/>
+                        <segue destination="5TG-eg-dIJ" kind="relationship" relationship="rootViewController" id="9bK-rl-VN0"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eBy-EM-5vs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

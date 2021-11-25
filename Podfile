@@ -6,5 +6,7 @@ target 'GooglePlaceAPIPractice' do
   use_frameworks!
 
   # Pods for GooglePlaceAPIPractice
-  pod 'Alamofire', '~> 5.4'	 
+  pod 'Alamofire', '~> 5.4'
+  pod 'GoogleMaps', '5.2.0'
+  pod 'GooglePlaces', '5.1.0'
 end
