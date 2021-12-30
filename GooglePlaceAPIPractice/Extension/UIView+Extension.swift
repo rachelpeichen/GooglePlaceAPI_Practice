@@ -21,4 +21,9 @@ extension UIView {
             else { fatalError("view of type \(Self.self) not found in \(nib)") }
         return view
     }
+    
+    class func viewFromNibName(_ name: String) -> UIView? {
+      let views = Bundle.main.loadNibNamed(name, owner: nil, options: nil)
+      return views?.first as? UIView
+    }
 }

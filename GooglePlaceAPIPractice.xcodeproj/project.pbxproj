@@ -20,7 +20,6 @@
 		D10A818B277B5F5600BA2A1D /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10A818A277B5F5600BA2A1D /* ReviewModel.swift */; };
 		D10A818E277B63FC00BA2A1D /* MarkerInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10A818D277B63FC00BA2A1D /* MarkerInfoView.swift */; };
 		D10A8190277B641900BA2A1D /* MarkerInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D10A818F277B641900BA2A1D /* MarkerInfoView.xib */; };
-		D10A8192277B653600BA2A1D /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10A8191277B653600BA2A1D /* UIView+Extension.swift */; };
 		D10A8194277C08FC00BA2A1D /* PlaceDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10A8193277C08FC00BA2A1D /* PlaceDetailViewModel.swift */; };
 		D10A8196277C0C2F00BA2A1D /* PlaceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10A8195277C0C2F00BA2A1D /* PlaceDetailViewController.swift */; };
 		D10A8198277C380200BA2A1D /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10A8197277C380200BA2A1D /* CollectionViewController.swift */; };
@@ -32,6 +31,7 @@
 		D10B3106274B69970060E2CF /* PlaceMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10B3105274B69970060E2CF /* PlaceMarker.swift */; };
 		D10B3109274B87000060E2CF /* Pods_GooglePlaceAPIPractice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 202EAFFCD4E2BA1EF9ABCE31 /* Pods_GooglePlaceAPIPractice.framework */; };
 		D16396B3277C50D8004CC0F2 /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16396B2277C50D8004CC0F2 /* CollectionViewModel.swift */; };
+		D16396B6277D5E9B004CC0F2 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16396B5277D5E9B004CC0F2 /* UIView+Extension.swift */; };
 		D171A5F5274C8F9D005B3CD0 /* GoogleDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D171A5F4274C8F9D005B3CD0 /* GoogleDataProvider.swift */; };
 		D171A5F7274C8FBF005B3CD0 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D171A5F6274C8FBF005B3CD0 /* Observer.swift */; };
 		D171A5F9274C8FFA005B3CD0 /* GoogleMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D171A5F8274C8FFA005B3CD0 /* GoogleMapViewModel.swift */; };
@@ -58,7 +58,6 @@
 		D10A818A277B5F5600BA2A1D /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
 		D10A818D277B63FC00BA2A1D /* MarkerInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerInfoView.swift; sourceTree = "<group>"; };
 		D10A818F277B641900BA2A1D /* MarkerInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkerInfoView.xib; sourceTree = "<group>"; };
-		D10A8191277B653600BA2A1D /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		D10A8193277C08FC00BA2A1D /* PlaceDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailViewModel.swift; sourceTree = "<group>"; };
 		D10A8195277C0C2F00BA2A1D /* PlaceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailViewController.swift; sourceTree = "<group>"; };
 		D10A8197277C380200BA2A1D /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +68,7 @@
 		D10B3103274B472A0060E2CF /* GoogleMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapViewController.swift; sourceTree = "<group>"; };
 		D10B3105274B69970060E2CF /* PlaceMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceMarker.swift; sourceTree = "<group>"; };
 		D16396B2277C50D8004CC0F2 /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
+		D16396B5277D5E9B004CC0F2 /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		D171A5F4274C8F9D005B3CD0 /* GoogleDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDataProvider.swift; sourceTree = "<group>"; };
 		D171A5F6274C8FBF005B3CD0 /* Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
 		D171A5F8274C8FFA005B3CD0 /* GoogleMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapViewModel.swift; sourceTree = "<group>"; };
@@ -91,7 +91,7 @@
 		781A67AB26B3F25D00347359 = {
 			isa = PBXGroup;
 			children = (
-				D171A600274CC8B8005B3CD0 /* Extension */,
+				D16396B4277D5E9B004CC0F2 /* Extension */,
 				B98F522E419852B0ADFC8B52 /* Frameworks */,
 				781A67B626B3F25D00347359 /* GooglePlaceAPIPractice */,
 				ED2B054BFC6348F8EE4C5870 /* Pods */,
@@ -129,6 +129,7 @@
 		781A67E026B5250D00347359 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				D16396B7277D65BE004CC0F2 /* API */,
 				D171A5F4274C8F9D005B3CD0 /* GoogleDataProvider.swift */,
 				D10A819E277C409200BA2A1D /* FirebaseManager.swift */,
 			);
@@ -198,6 +199,22 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		D16396B4277D5E9B004CC0F2 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D16396B5277D5E9B004CC0F2 /* UIView+Extension.swift */,
+			);
+			name = Extension;
+			path = GooglePlaceAPIPractice/Extension;
+			sourceTree = "<group>";
+		};
+		D16396B7277D65BE004CC0F2 /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		D171A5FC274CC84A005B3CD0 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,14 +222,6 @@
 				D171A602274CC92A005B3CD0 /* APIurl.swift */,
 			);
 			path = Utility;
-			sourceTree = "<group>";
-		};
-		D171A600274CC8B8005B3CD0 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				D10A8191277B653600BA2A1D /* UIView+Extension.swift */,
-			);
-			name = Extension;
 			sourceTree = "<group>";
 		};
 		ED2B054BFC6348F8EE4C5870 /* Pods */ = {
@@ -368,7 +377,6 @@
 				D171A603274CC92A005B3CD0 /* APIurl.swift in Sources */,
 				D10A818B277B5F5600BA2A1D /* ReviewModel.swift in Sources */,
 				781A67B826B3F25D00347359 /* AppDelegate.swift in Sources */,
-				D10A8192277B653600BA2A1D /* UIView+Extension.swift in Sources */,
 				D171A5F7274C8FBF005B3CD0 /* Observer.swift in Sources */,
 				D16396B3277C50D8004CC0F2 /* CollectionViewModel.swift in Sources */,
 				D10A8194277C08FC00BA2A1D /* PlaceDetailViewModel.swift in Sources */,
@@ -377,6 +385,7 @@
 				D10B3106274B69970060E2CF /* PlaceMarker.swift in Sources */,
 				D10B3104274B472A0060E2CF /* GoogleMapViewController.swift in Sources */,
 				D10A819C277C3E9600BA2A1D /* CollectionTableViewCell.swift in Sources */,
+				D16396B6277D5E9B004CC0F2 /* UIView+Extension.swift in Sources */,
 				D10A8185277B3FB200BA2A1D /* ResultModel.swift in Sources */,
 				D10A8183277B3F6400BA2A1D /* PhotoModel.swift in Sources */,
 				D10A819F277C409200BA2A1D /* FirebaseManager.swift in Sources */,
