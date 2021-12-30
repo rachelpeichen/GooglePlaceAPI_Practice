@@ -2,104 +2,63 @@
 
 import UIKit
 import CoreLocation
+import Alamofire
 
-typealias PlacesCompletion = ([PlacesNearbySearch]) -> Void
-typealias PlaceDetailCompletion = (PlacesNearbySearch) -> Void
+typealias NearbyCompletion = (NearbySearch) -> Void
+typealias DetailCompletion = (PlaceDetail) -> Void
 typealias ErrorHandler = (Error) -> Void
-//typealias PhotoCompletion = (UIImage?) -> Void // unuse now
 
 class GoogleDataProvider {
     
     static let shared = GoogleDataProvider()
-//    private var photosDictionary: [String: UIImage] = [:] // unuse now
-    private var placesTask: URLSessionDataTask?
-    private var session: URLSession { return URLSession.shared }
     
-    func fetchPlaces(near coordinate: CLLocationCoordinate2D, radius: Double, completion: @escaping PlacesCompletion, onError: @escaping ErrorHandler) {
-        // MARK: - 包裝url string
+    func searchNearbyPlaces(near coordinate: CLLocationCoordinate2D, radius: Double, completion: @escaping NearbyCompletion, onError: @escaping ErrorHandler) {
+#warning("包裝url")
         var urlString = APIurl.nearbySearch + "location=\(coordinate.latitude),\(coordinate.longitude)" + "&radius=\(radius)" + "&keyword=coffee" + "&key=\(googleApiKey)"
-        
         urlString = urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) ?? urlString
-        
-        guard let url = URL(string: urlString) else {
-            completion([])
-            return
-        }
-        
-        if let task = placesTask, task.taskIdentifier > 0 && task.state == .running {
-            task.cancel()
-        }
-        
-        
-        
-        placesTask = session.dataTask(with: url) { data, response, error in
+#warning("設計api架構")
+        AF.request(urlString, method: .get).validate(statusCode: 200..<299).responseDecodable(of: NearbySearch.self) { response in
             
-            if let error = error {
+            switch response.result {
+            case .success(let data):
+                completion(data)
+                
+            case .failure(let error):
                 onError(error)
-            }
-            
-            guard let data = data else {
-                DispatchQueue.main.async {
-                    completion([])
+                guard let urlError = error.underlyingError as? URLError else { return }
+                switch urlError.code {
+                case .timedOut:
+                    print(urlError)
+                case .notConnectedToInternet:
+                    print(urlError)
+                default:
+                    print(urlError)
                 }
-                return
-            }
-            
-            
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            guard let placesResponse = try? decoder.decode(PlacesNearbySearch.Response.self, from: data) else {
-                DispatchQueue.main.async {
-                    completion([])
-                }
-                return
-            }
-            
-            if let errorMessage = placesResponse.errorMessage {
-                print(errorMessage)
-            }
-            
-            DispatchQueue.main.async {
-                completion(placesResponse.results)
             }
         }
-        placesTask?.resume()
     }
     
-    func fetchPlaceDetail(placeID: String, completion: @escaping PlaceDetailCompletion, onError: @escaping ErrorHandler) {
-        var urlString = APIurl.placeDetail + "place_id=" + placeID
-        
+    func fetchPlaceDetail(placeID: String, completion: @escaping DetailCompletion, onError: @escaping ErrorHandler) {
+        var urlString = APIurl.placeDetail + "place_id=" + placeID + "&key=\(googleApiKey)"
         urlString = urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) ?? urlString
-        
-        let url = URL(string: urlString)
-        print(url)
-        // guard let url = URL(string: urlString) else { return }
-        
-        //  現在會跳到 task.cancel
-//        if let task = placesTask, task.taskIdentifier > 0 && task.state == .running {
-//            task.cancel()
-//        }
-        
-        placesTask = session.dataTask(with: url!) { data, response, error in
+        AF.request(urlString, method: .get).validate(statusCode: 200..<299).responseDecodable(of: PlaceDetail.self) { response in
             
-            if let error = error {
+            switch response.result {
+            case .success(let data):
+                completion(data)
+                
+            case .failure(let error):
                 onError(error)
-            }
-            
-            guard let data = data else { return }
-            
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            guard let placesResponse = try? decoder.decode(PlacesNearbySearch.Response.self, from: data) else { return }
-            
-            if let errorMessage = placesResponse.errorMessage {
-                print(errorMessage)
-            }
-            
-            DispatchQueue.main.async {
-                  completion(placesResponse.results[0])
+                guard let urlError = error.underlyingError as? URLError else { return }
+                switch urlError.code {
+                case .timedOut:
+                    print(urlError)
+                case .notConnectedToInternet:
+                    print(urlError)
+                default:
+                    print(urlError)
+                }
             }
         }
-        placesTask?.resume()
     }
 }

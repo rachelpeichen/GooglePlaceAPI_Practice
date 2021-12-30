@@ -9,15 +9,15 @@ import Foundation
 import CoreLocation
 
 class GoogleMapViewModel {
-
-    let nearbyPlaces: Box<[PlacesNearbySearch]?> = Box(nil) // no places initially
-    var onError: ((Error) -> Void)?
     
+    var nearbyPlaces: Observer<NearbySearch?> = Observer(nil) // no places initially
+    var onNearbySearchError: ((Error) -> Void)?
+
     func fetchNearbyPlaces(near coordinate: CLLocationCoordinate2D, radius: Double) {
-        GoogleDataProvider.shared.fetchPlaces(near: coordinate, radius: radius) { [weak self] places in
-            self?.nearbyPlaces.value = places
+        GoogleDataProvider.shared.searchNearbyPlaces(near: coordinate, radius: radius) { nearbyPlaces in
+            self.nearbyPlaces.value = nearbyPlaces
         } onError: { error in
-            self.onError?(error)
+            self.onNearbySearchError?(error)
         }
     }
 }

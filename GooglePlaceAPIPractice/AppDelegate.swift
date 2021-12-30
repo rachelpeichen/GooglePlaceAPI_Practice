@@ -8,6 +8,7 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
+import Firebase
 
 // let googleApiKey = "ENTER_KEY_HERE"
 let googleApiKey = "AIzaSyDFnUKfr_il6ACVyBNki_E0zCDeZgLERdc"
@@ -21,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     GMSServices.provideAPIKey(googleApiKey)
     GMSPlacesClient.provideAPIKey(googleApiKey)
     
+    FirebaseApp.configure()
     return true
   }
 

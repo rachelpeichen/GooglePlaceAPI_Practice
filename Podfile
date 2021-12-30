@@ -9,4 +9,9 @@ target 'GooglePlaceAPIPractice' do
   pod 'Alamofire', '~> 5.4'
   pod 'GoogleMaps', '5.2.0'
   pod 'GooglePlaces', '5.1.0'
+  
+  # Add the pods for the Firebase products you want to use in your app
+  # For example, to use Firebase Authentication and Cloud Firestore
+  pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
 end
